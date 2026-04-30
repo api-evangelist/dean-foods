@@ -1,11 +1,34 @@
-# Dean Foods
+# Dean Foods (dean-foods)
 
-This is a repository for tracking the APIs, SDKs, and other developer resources for Dean Foods.
+Dean Foods was a leading U.S. food and beverage company and one of the largest processors and direct-to-store distributors of fresh fluid milk and other dairy products. After filing for Chapter 11 bankruptcy in 2019, most of Dean Foods' assets were acquired by Dairy Farmers of America (DFA) in 2020. Dean Foods no longer operates as an independent company.
+
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/dean-foods/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+- **Position:** Provider
+- **Access:** 1st-Party
+- **x-type:** company
+
+## Tags
+
+- Acquired, Beverages, Dairy, Defunct, Food and Beverage, Milk
+
+## Timestamps
+
+- **Created:** 2025-01-01
+- **Modified:** 2026-04-28
 
 ## APIs
 
-No APIs have been documented yet. Check back for updates.
+Dean Foods no longer operates as an independent company. No public developer APIs were ever published, and surviving brands are now managed under Dairy Farmers of America (DFA). This profile is retained for historical reference.
 
-## Properties
+## Common Properties
 
-- [Website](https://www.dean-foods.com)
+- [Successor - DFA](https://www.dfamilk.com/)
+- [DFA Newsroom](https://www.dfamilk.com/newsroom)
+
+## Maintainers
+
+- **Kin Lane** - kin@apievangelist.com
