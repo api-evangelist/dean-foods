@@ -16,7 +16,7 @@ tags:
 created: '2025-01-01'
 modified: '2026-04-28'
 specificationVersion: '0.19'
-xType: company
+kind: company
 description: >-
   Dean Foods was a leading U.S. food and beverage company and one of the
   largest processors and direct-to-store distributors of fresh fluid milk
