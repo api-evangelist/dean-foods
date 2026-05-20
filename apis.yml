@@ -27,6 +27,8 @@ description: >-
   managed under DFA. This profile is retained for historical reference.
 apis: []
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/dean-foods
   - type: Successor
     url: https://www.dfamilk.com/
   - type: News
