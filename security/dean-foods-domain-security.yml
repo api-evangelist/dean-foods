@@ -1,0 +1,95 @@
+generated: '2026-09-05'
+method: probed
+source: DNS + TLS probe of deanfoods.com, 2026-09-05
+
+# Dean Foods — domain security posture of deanfoods.com.
+#
+# ATTRIBUTION, READ THIS FIRST. Dean Foods ceased to exist as an operating company
+# after its 2019 Chapter 11 filing and the 2020 sale of its assets. The registrant of
+# record on deanfoods.com is now DAIRY FARMERS OF AMERICA, INC., and the CAA iodef
+# contact is secops@dfamilk.com — so the posture measured below is the ACQUIRER's
+# stewardship of an inherited brand domain, not a security program Dean Foods runs.
+# It is recorded because deanfoods.com is the domain this record names, and because
+# the shape of it (mail hardened, web abandoned) is itself the evidence that the
+# company is gone: a domain kept alive for mail and brand defence, with no HTTPS
+# listener at all.
+
+name: Dean Foods
+slug: dean-foods
+checked: '2026-09-05'
+hosts_probed:
+- deanfoods.com
+
+domains:
+- domain: deanfoods.com
+  registrar: GoDaddy Corporate Domains, LLC
+  registrant_organization: Dairy Farmers of America, Inc.
+  created: '1997-04-04'
+  updated: '2026-03-08'
+  registry_expiry: '2027-04-05'
+  domain_status:
+  - clientTransferProhibited
+  resolves: true
+  a_records:
+  - 75.2.103.146
+  - 99.83.188.150
+  nameservers:
+  - ns11.gcd-dns.com
+  - ns12.gcd-dns.com
+
+  tls:
+    https_listener: false
+    handshake: failed
+    error: 'tlsv1 alert internal error (LibreSSL ST_CONNECT)'
+    certificate: null
+    note: >-
+      Port 443 accepts the connection but aborts the TLS handshake, so no certificate
+      can be retrieved and no https:// request to this host can complete. Every
+      https probe in this repo against deanfoods.com is therefore status 0 —
+      no connection, not a 404.
+  hsts:
+    present: false
+    header: null
+    note: Cannot be served — there is no working HTTPS response to carry the header.
+  http:
+    listener: true
+    behavior: blanket 301 to https://www.dfamilk.com/ on every path tested
+    server: awselb/2.0
+    head_method: 405 Method Not Allowed (WAF in front of the ELB refuses HEAD)
+
+  dnssec:
+    signed: false
+    ds_records: []
+  caa:
+    present: true
+    records:
+    - '0 issue "www.digicert.com"'
+    - '0 issue "letsencrypt.org"'
+    - '0 iodef "mailto:secops@dfamilk.com"'
+  spf:
+    present: true
+    record: 'v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ~all'
+    all_qualifier: softfail
+    note: Proofpoint macro-expanded SPF include — the same tenant DFA uses.
+  dmarc:
+    present: true
+    record: 'v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com'
+    policy: reject
+    aggregate_reporting: true
+    forensic_reporting: true
+  mx:
+    present: true
+    records:
+    - 10 mxa-004c8e03.gslb.pphosted.com
+    - 10 mxb-004c8e03.gslb.pphosted.com
+
+summary:
+  email_authentication: strong
+  web_transport: absent
+  finding: >-
+    An asymmetric posture that is diagnostic of a wound-down brand: SPF, DMARC at
+    p=reject with both aggregate and forensic reporting, CAA with a named security
+    contact, and live Proofpoint MX — all of the controls that stop someone spoofing
+    mail from a well-known dead brand — combined with no HTTPS service whatsoever and
+    a plain-HTTP blanket redirect to the acquirer. The domain is being defended, not
+    operated.

@@ -37,8 +37,11 @@ tags:
   - Milk
   - Fortune 500
 created: '2025-01-01'
-modified: '2026-04-28'
+modified: '2026-09-05'
 specificationVersion: '0.23'
+x-status: defunct
+x-status-detail: Filed Chapter 11 in November 2019; most assets sold to Dairy Farmers of
+  America in 2020 and the company wound down. No first-party site remains.
 kind: company
 description: >-
   Dean Foods was a leading U.S. food and beverage company and one of the
@@ -52,10 +55,47 @@ apis: []
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/dean-foods
-  - type: Successor
+  - type: Acquirer
     url: https://www.dfamilk.com/
-  - type: News
-    url: https://www.dfamilk.com/newsroom
+  - type: ShutdownNotice
+    url: >-
+      https://www.prnewswire.com/news-releases/dean-foods-company-initiates-voluntary-reorganization-with-new-financial-support-from-existing-lenders-300956285.html
+  - type: DomainSecurity
+    url: security/dean-foods-domain-security.yml
+  - type: LLMsTxt
+    url: llms/dean-foods-llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-05'
+  status: minimal
+  artifacts_added: 3
+  pass: local-v3
+x-coverage:
+  state: none
+  reason: defunct
+  detail: >-
+    Dean Foods filed Chapter 11 on 2019-11-12 and its plants and brands were sold to
+    Dairy Farmers of America in May 2020; the company has no operating surface left to
+    profile — deanfoods.com is now registered to Dairy Farmers of America, Inc., serves
+    no HTTPS at all (the TLS handshake to port 443 aborts with "tlsv1 alert internal
+    error", so every https probe returns 0 rather than a status code), and over plain
+    HTTP answers 301 to https://www.dfamilk.com/ for every path including
+    /openapi.json, /llms.txt and all seven /.well-known/ paths, while no api.,
+    developer., docs. or portal. subdomain resolves on either deanfoods.com or
+    dfamilk.com and no GitHub organization exists under any spelling of the name.
+  evidence:
+    - url: https://deanfoods.com/openapi.json
+      status: 0
+    - url: https://deanfoods.com/.well-known/agent-card.json
+      status: 0
+    - url: http://deanfoods.com/
+      status: 301
+    - url: https://www.dfamilk.com/.well-known/agent-card.json
+      status: 404
+    - url: https://www.dfamilk.com/zzz-soft404-control-probe
+      status: 404
+    - url: https://api.github.com/orgs/deanfoods
+      status: 404
+  checked: '2026-09-05'

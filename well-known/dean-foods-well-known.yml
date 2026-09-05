@@ -1,0 +1,125 @@
+generated: '2026-09-05'
+method: probed
+source: https://deanfoods.com/.well-known/ and https://www.dfamilk.com/.well-known/
+
+# Dean Foods — /.well-known/ probe. RECORDED ABSENCE.
+#
+# Dean Foods filed Chapter 11 in November 2019 and its assets were sold to Dairy
+# Farmers of America (DFA) in May 2020. The company no longer operates, and no
+# host in this record serves any /.well-known/ document.
+#
+# TWO DISTINCT ABSENCES ARE RECORDED HERE, and they are different facts:
+#
+#   deanfoods.com / www.deanfoods.com — the domain is still registered (registrant
+#   of record: Dairy Farmers of America, Inc.; registry expiry 2027-04-05) and still
+#   resolves, but there is NO HTTPS LISTENER: a TLS handshake to port 443 aborts with
+#   "tlsv1 alert internal error", so every https:// probe returns status 0 (no
+#   connection, never an HTTP response). Over plain HTTP the host is a blanket
+#   redirector: EVERY path, including every /.well-known/ path, answers 301 to
+#   https://www.dfamilk.com/ — it is a brand-parking redirect, not a served document.
+#
+#   dfamilk.com / www.dfamilk.com — the SUCCESSOR company's live site (IIS/ASP.NET).
+#   It is probed here only because apis.yml carries a Successor pointer to it. It
+#   returns a hard 404 on every /.well-known/ path, and a control probe of a path
+#   that cannot exist (/zzz-soft404-control-probe) also returns 404, so these are
+#   genuine 404s and not soft-404s scoring as absence. NOTE: dfamilk.com is DAIRY
+#   FARMERS OF AMERICA's host, not Dean Foods'. Nothing it serves is creditable to
+#   Dean Foods, and nothing was credited.
+#
+# NO WellKnown and NO SecurityTxt pointer is emitted in apis.yml. A pointer asserts
+# that the PROVIDER serves that surface; not one document was served by anyone.
+
+name: Dean Foods
+slug: dean-foods
+checked: '2026-09-05'
+hit_count: 0
+served_document_count: 0
+pointer_emitted: false
+
+hosts:
+- host: deanfoods.com
+  scheme_note: >-
+    No HTTPS listener — TLS handshake aborts (tlsv1 alert internal error), so https
+    probes return 0. HTTP probes are shown as the 301 blanket redirect they are.
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 0
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+    file: null
+  - path: /.well-known/api-catalog
+    status: 0
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 0
+    file: null
+  - path: /.well-known/agent.json
+    status: 0
+    file: null
+- host: www.deanfoods.com
+  scheme_note: Same A records and same broken TLS listener as the apex.
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 0
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+    file: null
+  - path: /.well-known/api-catalog
+    status: 0
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 0
+    file: null
+  - path: /.well-known/agent.json
+    status: 0
+    file: null
+- host: www.dfamilk.com
+  scheme_note: >-
+    Successor company (Dairy Farmers of America). Probed only because apis.yml carries
+    a Successor pointer here. Hard 404s, confirmed against a control path. Not Dean
+    Foods' surface and not credited to Dean Foods.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+
+http_redirect_observation:
+  host: deanfoods.com
+  observed: '2026-09-05'
+  behavior: >-
+    Every HTTP path tested returned 301 Location https://www.dfamilk.com/ — including
+    /, /openapi.json, /llms.txt and all seven /.well-known/ paths. HEAD is refused with
+    405 by the AWS ELB WAF in front of it; GET is honored.
+  server: awselb/2.0
