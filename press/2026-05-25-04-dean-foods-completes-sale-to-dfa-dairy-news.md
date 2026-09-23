@@ -1,7 +1,9 @@
 ---
 title: Dean Foods Completes Sale to DFA | Dairy News
 url: https://www.lancasterfarming.com/farming-news/dairy/dean-foods-completes-sale-to-dfa/article_cc082519-cf62-522d-8841-bb0b497557c0.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Dean Foods" press release artificial intelligence'
 position: 4
 source: serpapi-google

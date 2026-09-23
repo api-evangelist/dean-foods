@@ -1,7 +1,9 @@
 ---
 title: Dean Foods opts for internal transformation plan after ...
 url: https://www.just-food.com/news/dean-foods-opts-for-internal-transformation-plan-after-strategic-review/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Dean Foods" press release artificial intelligence'
 position: 3
 source: serpapi-google
